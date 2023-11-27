@@ -1,15 +1,23 @@
-import {FC, useState} from 'react'
-
+import {FC, useEffect} from 'react'
 import './CoursesPage.css'
 
 const CoursesPage: FC = () => {
-    const [searchValue, setSearchValue] = useState('')
+    useEffect(() => {
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString)
+        const courseTitle = urlParams.get('course_title')
 
-    const [loading, setLoading] = useState(false)
-
+        console.log(courseTitle)
+    }, []);
 
     return (
-        <h1>Hello, world!</h1>
+        <div>
+            <form method="GET" action="course" name="search">
+            <label htmlFor="course_title">Введите название:</label>
+            <input type="text" id="course_title" name="course_title"/>
+            <input type="submit" className="button" value="Поиск"></input>
+            </form>
+        </div>
     )
 }
 
