@@ -1,6 +1,7 @@
-import {FC, useEffect, useState} from 'react'
+import { FC, useEffect, useState } from 'react'
 import './CoursePage.css'
-import {Course, getCourseByName } from './modules/get-course-by-name'
+import { getCourseByName } from './modules/get-course-by-name'
+import { Course } from './modules/ds'
 
 const CoursePage: FC = () => {
 
@@ -11,13 +12,13 @@ const CoursePage: FC = () => {
         const urlParams = new URLSearchParams(queryString)
         const courseName = urlParams.get('course_title')
     
-        const getCourse = async () => {
+        const loadCourse = async () => {
             const result = await getCourseByName(String(courseName))
             console.log(result)
             setCourse(result)
         }
     
-        getCourse()
+        loadCourse()
 
     }, []);
     
@@ -33,10 +34,6 @@ const CoursePage: FC = () => {
             <p className="course_line"><b>E-Mail:</b> { course?.CoachEmail }</p>
             <p className="course_line"><b>Телефон:</b> { course?.CoachPhone }</p>
             <p className="course_line"><b>{ course?.Description }</b></p>
-            <form method="POST" action="delete_course/{{ .Title }}" name="delete_course">
-                <input type="hidden" name="card_title" id="card_title" value="{{ .Title }}" />
-                <input type="submit" className="button page_button" value="Сменить статус" />
-            </form>
             <a className="button page_button" href="..">Домой</a>
         </div>
     )
