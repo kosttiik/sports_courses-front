@@ -4,7 +4,7 @@ import './CoursesPage.css'
 
 import { Course } from './modules/ds'
 import { getCourses } from './modules/get-courses'
-import CourseCard from './components/CourseCard'
+import CourseCard from './components/CourseCard/CourseCard'
 
 import defaultImage from '../public/vite.svg'
 
