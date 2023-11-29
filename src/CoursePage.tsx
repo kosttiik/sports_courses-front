@@ -31,7 +31,7 @@ const CoursePage: FC = () => {
             <Card className='page_card'>
                 <Card.Img src={(course?.Image == '' ? defaultImage?.toString() : "data:image/jpg;base64, " + course?.Image)} className="card-img-top" variant="top"/>
                 <Card.Body>
-                    <p>{ course?.Description }</p>
+                    <p><b>{ course?.Description }</b></p>
                     <p><b>Статус курса:</b> { course?.Status }</p>
                     <p><b>Место:</b> { course?.Location }</p>
                     <p><b>Количество мест:</b> { course?.Capacity } чел.</p>
@@ -39,7 +39,6 @@ const CoursePage: FC = () => {
                     <p><b>Курс проводит:</b> { course?.CoachName }</p>
                     <p><b>E-Mail:</b> { course?.CoachEmail }</p>
                     <p><b>Телефон:</b> { course?.CoachPhone }</p>
-                    <p><b>{ course?.Description }</b></p>
                 </Card.Body>
                 <Card.Footer>
                     <Button href="/">Домой</Button>
