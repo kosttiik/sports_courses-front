@@ -1,0 +1,12 @@
+.g-5 {
+    display: flex;
+    height: auto;
+    width: 1750px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: bolder;
+}

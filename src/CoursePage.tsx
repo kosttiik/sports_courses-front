@@ -6,7 +6,7 @@ import './CoursePage.css'
 import { getCourseByName } from './modules/get-course-by-name'
 import { Course } from './modules/ds'
 
-import defaultImage from '../public/vite.svg'
+import defaultImage from '../public/fitness.png'
 
 const CoursePage: FC = () => {
 
