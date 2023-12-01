@@ -6,7 +6,7 @@ import './CoursePage.css'
 import { getCourseByName } from './modules/get-course-by-name'
 import { Course } from './modules/ds'
 
-import defaultImage from '../public/fitness.png'
+import defaultImage from '/fitness.png'
 
 const CoursePage: FC = () => {
 
@@ -41,7 +41,7 @@ const CoursePage: FC = () => {
                     <p><b>Телефон:</b> { course?.CoachPhone }</p>
                 </Card.Body>
                 <Card.Footer>
-                    <Button href="/">Домой</Button>
+                    <Button href="/sports_courses-front/">Домой</Button>
                 </Card.Footer>
             </Card>
         </div>        

@@ -11,7 +11,7 @@ function Breadcrumbs() {
 
     return (
         <Breadcrumb>
-            <Breadcrumb.Item href="/">Домашняя страница</Breadcrumb.Item>
+            <Breadcrumb.Item href="/sports_courses-front/">Домашняя страница</Breadcrumb.Item>
             {(course_title != null && title_pattern === null) && 
                 <>
                     <Breadcrumb.Item active>Курс</Breadcrumb.Item>

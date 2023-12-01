@@ -16,8 +16,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Navigation />
       <Breadcrumbs />
       <Routes>
-        <Route path="/" Component={CoursesPage} />
-        <Route path="/course" Component={CoursePage} />
+        <Route path="/sports_courses-front" Component={CoursesPage} />
+        <Route path="/sports_courses-front/course" Component={CoursePage} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

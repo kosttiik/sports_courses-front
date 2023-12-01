@@ -15,7 +15,7 @@ const CourseCard: FC<Props> = ({ imageUrl, courseTitle, pageUrl }) => {
         await fetch('/api/course/delete_restore/' + courseTitle, {
             method: 'PUT'
         });
-        window.location.replace('/')
+        window.location.replace('/sports_courses-front/')
     } 
 
     return (
@@ -28,8 +28,8 @@ const CourseCard: FC<Props> = ({ imageUrl, courseTitle, pageUrl }) => {
             </Card.Body>
             <Card.Footer>
                 <div className="btn-wrapper text-center d-flex justify-content-between">
-                    <Button variant="secondary" href={pageUrl}>Подробнее</Button>
-                    <Button variant="warning" onClick={deleteRestoreCourse}>Изменить статус</Button>
+                    <Button variant="primary" href={pageUrl}>Подробнее</Button>
+                    <Button variant="secondary" onClick={deleteRestoreCourse}>Изменить статус</Button>
                 </div>
             </Card.Footer>
         </Card>

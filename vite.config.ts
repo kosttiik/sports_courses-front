@@ -16,5 +16,6 @@ export default defineConfig({
        }
       }
   },
+  base: "/sports_courses-front/",
   plugins: [react()],
 })
