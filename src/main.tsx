@@ -8,10 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import CoursesPage from './CoursesPage'
 import CoursePage from './CoursePage'
 import AuthPage from './AuthPage'
+import EnrollmentsPage from './EnrollmentsPage'
 import AccountPage from './AccountPage'
 import Navigation from './components/Navigation/Navigation'
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs'
 import store from './store/store'
+
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -21,12 +23,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Navigation />
         <Breadcrumbs />
         <Routes>
-          <Route path="/sports_courses-front" Component={CoursesPage} />
-          <Route path="/sports_courses-front/course" Component={CoursePage} />
-          <Route path="/sports_courses-front/auth" Component={AuthPage} />
-          <Route path="/sports_courses-front/account" Component={AccountPage} />
+          <Route path="/sports_courses-front" Component={ CoursesPage } />
+          <Route path="/sports_courses-front/course" Component={ CoursePage } />
+          <Route path="/sports_courses-front/auth" Component={ AuthPage } />
+          <Route path="/sports_courses-front/account" Component={ AccountPage } />
+          <Route path="/sports_courses-front/enrollments" Component={ EnrollmentsPage }></Route>
         </Routes>
       </BrowserRouter>
     </Provider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

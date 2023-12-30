@@ -12,6 +12,15 @@ function Breadcrumbs() {
     return (
         <Breadcrumb>
             <Breadcrumb.Item href="/sports_courses-front/">Домашняя страница</Breadcrumb.Item>
+            {window.location.pathname == '/sports_courses-front/auth' &&
+                <Breadcrumb.Item>Вход</Breadcrumb.Item>
+            }
+            {window.location.pathname == '/sports_courses-front/account' &&
+                <Breadcrumb.Item>Аккаунт</Breadcrumb.Item>
+            }
+            {window.location.pathname == '/sports_courses-front/flights' &&
+                <Breadcrumb.Item>Записи</Breadcrumb.Item>
+            }
             {(course_title != null && title_pattern === null) && 
                 <>
                     <Breadcrumb.Item active>Курс</Breadcrumb.Item>
