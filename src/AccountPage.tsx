@@ -41,7 +41,7 @@ const AccountPage: FC = () => {
                 <>
                     <h1>Аккаунт</h1>
                     <p>Имя пользователя: { userName }</p>
-                    <p>Роль пользователя: { userRoleString }</p>
+                    <p>Роль: { userRoleString }</p>
                     <Button onClick={ sendLogout }>Выйти из системы</Button>
                 </>
             }

@@ -1,8 +1,3 @@
-.page_card {
-    height: auto;
-    text-align: center;
-}
-
 .card_container {
     display: flex;
     justify-content: center;

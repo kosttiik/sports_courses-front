@@ -10,6 +10,9 @@ import CoursePage from './CoursePage'
 import AuthPage from './AuthPage'
 import EnrollmentsPage from './EnrollmentsPage'
 import AccountPage from './AccountPage'
+import EnrollPage from './EnrollPage'
+import EnrollmentPage from './EnrollmentPage'
+
 import Navigation from './components/Navigation/Navigation'
 import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs'
 import store from './store/store'
@@ -27,7 +30,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="/sports_courses-front/course" Component={ CoursePage } />
           <Route path="/sports_courses-front/auth" Component={ AuthPage } />
           <Route path="/sports_courses-front/account" Component={ AccountPage } />
-          <Route path="/sports_courses-front/enrollments" Component={ EnrollmentsPage }></Route>
+          <Route path="/sports_courses-front/enrollments" Component={ EnrollmentsPage } />
+          <Route path="/sports_courses-front/enroll" Component={ EnrollPage } />
+          <Route path="/sports_courses-front/enrollment" Component={ EnrollmentPage } />
         </Routes>
       </BrowserRouter>
     </Provider>

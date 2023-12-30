@@ -1,5 +1,8 @@
 import { FC } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { Button, ButtonGroup, Card } from 'react-bootstrap'
+import store from '../../store/store'
+
 import './CourseCard.css'
 
 interface Props {
@@ -10,6 +13,7 @@ interface Props {
 
 
 const CourseCard: FC<Props> = ({ imageUrl, courseTitle, pageUrl }) => {
+    const { userRole } = useSelector((state: ReturnType<typeof store.getState>) => state.auth)
 
     const deleteRestoreCourse = async () => {
         await fetch('/api/course/delete_restore/' + courseTitle, {
@@ -19,19 +23,18 @@ const CourseCard: FC<Props> = ({ imageUrl, courseTitle, pageUrl }) => {
     } 
 
     return (
-        <Card>
-            <Card.Img className="card-img-top" variant="top" src={imageUrl}/>
-            <Card.Body>
-                <div className='textStyle'>
-                    <Card.Title> {courseTitle} </Card.Title>
-                </div>
+        <Card className='w-75 h-100'>
+            <Card.Img variant="top" src={imageUrl}/>
+            <Card.Body className='d-flex flex-column'>
+                <Card.Title className='mt-auto'> {courseTitle} </Card.Title>
+                <ButtonGroup className='text-center'>
+                    <Button variant="info" href={pageUrl}>Подробнее</Button>
+                    {((userRole?.toString() == '2') || (userRole?.toString() == '3')) && 
+                        <Button variant="warning" onClick={deleteRestoreCourse}>Удалить</Button>
+                    }
+                    <Button variant="success">Запись</Button>
+                </ButtonGroup>
             </Card.Body>
-            <Card.Footer>
-                <div className="btn-wrapper text-center d-flex justify-content-between">
-                    <Button variant="primary" href={pageUrl}>Подробнее</Button>
-                    <Button variant="secondary" onClick={deleteRestoreCourse}>Изменить статус</Button>
-                </div>
-            </Card.Footer>
         </Card>
     )
 }

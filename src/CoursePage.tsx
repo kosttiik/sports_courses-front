@@ -6,8 +6,6 @@ import './CoursePage.css'
 import { getCourseByName } from './modules/get-course-by-name'
 import { Course } from './modules/ds'
 
-import defaultImage from '/fitness.png'
-
 const CoursePage: FC = () => {
 
     const [course, setCourse] = useState<Course>()
@@ -28,17 +26,19 @@ const CoursePage: FC = () => {
 
     return (
         <div className='card_container'>
-            <Card className='page_card'>
-                <Card.Img src={(course?.ImageName == '' ? defaultImage?.toString() : "http://127.0.0.1:9000/courseimages/" + course?.ImageName)} className="card-img-top" variant="top"/>
+            <Card className='h-1'>
+            <Card.Img src={(course?.ImageName == '' ? '/course_image/fitness.png' : "/course_image/" + course?.ImageName)} className="card_image" variant="top" />
                 <Card.Body>
-                    <p><b>{ course?.Description }</b></p>
-                    <p><b>Статус курса:</b> { course?.Status }</p>
-                    <p><b>Место:</b> { course?.Location }</p>
-                    <p><b>Количество мест:</b> { course?.Capacity } чел.</p>
-                    <p><b>Зарегистрировано:</b> { course?.Enrolled } чел.</p>
-                    <p><b>Курс проводит:</b> { course?.CoachName }</p>
-                    <p><b>E-Mail:</b> { course?.CoachEmail }</p>
-                    <p><b>Телефон:</b> { course?.CoachPhone }</p>
+                    <Card.Text>
+                        <p><b>{ course?.Description }</b></p>
+                        <p><b>Статус курса:</b> { course?.Status }</p>
+                        <p><b>Место:</b> { course?.Location }</p>
+                        <p><b>Количество мест:</b> { course?.Capacity } чел.</p>
+                        <p><b>Зарегистрировано:</b> { course?.Enrolled } чел.</p>
+                        <p><b>Курс проводит:</b> { course?.CoachName }</p>
+                        <p><b>E-Mail:</b> { course?.CoachEmail }</p>
+                        <p><b>Телефон:</b> { course?.CoachPhone }</p>
+                    </Card.Text>
                 </Card.Body>
                 <Card.Footer>
                     <Button href="/sports_courses-front/">Домой</Button>

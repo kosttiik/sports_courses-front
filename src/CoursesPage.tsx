@@ -6,8 +6,6 @@ import { Course } from './modules/ds'
 import { getCourses } from './modules/get-courses'
 import CourseCard from './components/CourseCard/CourseCard'
 
-import defaultImage from '/fitness.png'
-
 const CoursesPage: FC = () => {
 
     const [courses, setCourses] = useState<Course[]>([])
@@ -43,7 +41,7 @@ const CoursesPage: FC = () => {
                 {courses.map((item, index) => (
                     <Col key={index}> 
                         <CourseCard {...{
-                             imageUrl: (item.ImageName == '' ? defaultImage?.toString() : "http://127.0.0.1:9000/courseimages/" + item.ImageName?.toString()),
+                             imageUrl: (item.ImageName == '' ? '/course_image/fitness.png' : "/course_image/" + item.ImageName?.toString()),
                              courseTitle: item.Title,
                              pageUrl: window.location.href.split('?')[0] + "course?course_title=" + item.Title
                         }}></CourseCard>
