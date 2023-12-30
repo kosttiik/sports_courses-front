@@ -9,5 +9,5 @@ export interface Course {
     Capacity: number,
     Enrolled: number,
     Description: string,
-    Image: string 
+    ImageName: string 
 }

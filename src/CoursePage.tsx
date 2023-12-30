@@ -29,7 +29,7 @@ const CoursePage: FC = () => {
     return (
         <div className='card_container'>
             <Card className='page_card'>
-                <Card.Img src={(course?.Image == '' ? defaultImage?.toString() : "data:image/jpg;base64, " + course?.Image)} className="card-img-top" variant="top"/>
+                <Card.Img src={(course?.ImageName == '' ? defaultImage?.toString() : "http://127.0.0.1:9000/courseimages/" + course?.ImageName)} className="card-img-top" variant="top"/>
                 <Card.Body>
                     <p><b>{ course?.Description }</b></p>
                     <p><b>Статус курса:</b> { course?.Status }</p>

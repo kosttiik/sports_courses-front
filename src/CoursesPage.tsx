@@ -39,11 +39,11 @@ const CoursesPage: FC = () => {
                 </form>
             </div>
 
-            <Row xs={5} md={5} className='g-5' >
+            <Row xs={4} md={4} className='g-4' >
                 {courses.map((item, index) => (
                     <Col key={index}> 
                         <CourseCard {...{
-                             imageUrl: (item.Image == '' ? defaultImage?.toString() : "data:image/jpg;base64, " + item.Image),
+                             imageUrl: (item.ImageName == '' ? defaultImage?.toString() : "http://127.0.0.1:9000/courseimages/" + item.ImageName?.toString()),
                              courseTitle: item.Title,
                              pageUrl: window.location.href.split('?')[0] + "course?course_title=" + item.Title
                         }}></CourseCard>
