@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react'
-// import { useSelector } from 'react-redux/es/hooks/useSelector'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -13,7 +12,7 @@ interface InputChangeInterface {
 }
 
 const AuthPage: FC = () => {
-    const {userToken, loading, userName, error, success} = useSelector(
+    const {userToken, loading, userName, success} = useSelector(
         (state: ReturnType<typeof store.getState>) => state.auth
     )
 

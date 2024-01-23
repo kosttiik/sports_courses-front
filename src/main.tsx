@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import CoursesPage from './CoursesPage'
-import CoursePage from './CoursePage'
+import GroupsPage from './GroupsPage'
+import GroupPage from './GroupPage'
 import AuthPage from './AuthPage'
 import EnrollmentsPage from './EnrollmentsPage'
 import AccountPage from './AccountPage'
@@ -26,8 +26,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Navigation />
         <Breadcrumbs />
         <Routes>
-          <Route path="/sports_courses-front" Component={ CoursesPage } />
-          <Route path="/sports_courses-front/course" Component={ CoursePage } />
+          <Route path="/sports_courses-front" Component={ GroupsPage } />
+          <Route path="/sports_courses-front/group" Component={ GroupPage } />
           <Route path="/sports_courses-front/auth" Component={ AuthPage } />
           <Route path="/sports_courses-front/account" Component={ AccountPage } />
           <Route path="/sports_courses-front/enrollments" Component={ EnrollmentsPage } />

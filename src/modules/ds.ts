@@ -1,6 +1,8 @@
-export interface Course {
+export interface Group {
     ID: number,
     Title: string,
+    Course: string,
+    Schedule: string,
     Location: string,
     Status: string,
     CoachName: string,
@@ -25,8 +27,6 @@ export interface Enrollment {
     DateCreated: string,
     DateProcessed: string,
     DateFinished: string,
-    StartDate: string,
-    EndDate: string,
     ModeratorRefer: string,
     UserRefer: string,
     Moderator: User,

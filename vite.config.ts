@@ -13,12 +13,12 @@ export default defineConfig({
         ws: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
        },
-      '/course_image': {
-        target: 'http://127.0.0.1:9000/courseimages/',
+      '/group_image': {
+        target: 'http://127.0.0.1:9000/groupimages/',
         changeOrigin: true,
         secure: false,
         ws: true,
-        rewrite: (path) => path.replace(/^\/course_image/, ''),
+        rewrite: (path) => path.replace(/^\/group_image/, ''),
       }
     }
   },

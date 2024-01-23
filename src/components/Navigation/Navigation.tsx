@@ -19,7 +19,10 @@ const Navigation: FC = () => {
               <Nav.Link href="/sports_courses-front/auth">Вход</Nav.Link>
             }
             {userToken &&
-              <Nav.Link href="/sports_courses-front/account">Аккаунт</Nav.Link>
+              <>
+                <Nav.Link href="/sports_courses-front/account">Аккаунт</Nav.Link>
+                <Nav.Link href="/sports_courses-front/enroll">Запись</Nav.Link>
+              </>
             }
           </Nav>
         </Navbar.Collapse>

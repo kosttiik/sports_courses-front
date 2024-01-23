@@ -1,7 +1,7 @@
-import { Course } from './ds'
+import { Group } from './ds'
 
-export const getCourseByName = async  (courseName = ''): Promise<Course> => {
-    return fetch('/api/course/' + String(courseName),{
+export const getGroupByName = async  (groupTitle = ''): Promise<Group> => {
+    return fetch('/api/group/' + String(groupTitle),{
         method: 'GET',
         headers: {
             'Accept': 'application/json',
@@ -13,6 +13,8 @@ export const getCourseByName = async  (courseName = ''): Promise<Course> => {
             {
                 "ID": 1,
                 "Title": "Отсуствует",
+                "Course": "Отсутствует",
+                "Schedule": "Отсутствует",
                 "Location": "Отсутствует",
                 "Status": "Действует",
                 "CoachName": "Отсутствует",
@@ -20,7 +22,7 @@ export const getCourseByName = async  (courseName = ''): Promise<Course> => {
                 "CoachEmail": "Отсутствует",
                 "Capacity": 0,
                 "Enrolled": 0,
-                "Description": "Курса не существует. Отсутствует связь с сервером.",
-                "Image": ""
+                "Description": "Группы не существует. Отсутствует связь с сервером.",
+                "ImageName": ""
             }))
 }

@@ -2,7 +2,7 @@ import { FC } from "react"
 
 import { useEffect, useState } from "react"
 
-import { Form, FormControl, FormGroup, Button } from "react-bootstrap"
+import { Form, FormControl, FormGroup, Button, FormSelect } from "react-bootstrap"
 
 import { getEnrollment } from "./modules/get-enrollment"
 import { Enrollment } from "./modules/ds"
@@ -34,8 +34,13 @@ const EnrollmentPage: FC = () => {
         <Form>
             <FormGroup>
                 <label htmlFor="statusInput">Статус</label>
-                <FormControl type='text' id="statusInput" defaultValue={enrollment?.Status}></FormControl>
-                <small id="statusHelp">Возможные статусы: Черновик, Удалён, Сформирован, Завершён, Отклонён</small>
+                <FormSelect id="statusInput" defaultValue={enrollment?.Status}>
+                    <option>Черновик</option>
+                    <option>Удалён</option>
+                    <option>Сформирован</option>
+                    <option>Завершён</option>
+                    <option>Отклонён</option>
+                </FormSelect>
             </FormGroup>
             <FormGroup>
                 <label htmlFor="dateCreatedInput">Дата создания</label>
@@ -48,14 +53,6 @@ const EnrollmentPage: FC = () => {
             <FormGroup>
                 <label htmlFor="dateFinishedInput">Дата завершения</label>
                 <FormControl id="dateFinishedInput" defaultValue={enrollment?.DateFinished}></FormControl>
-            </FormGroup>
-            <FormGroup>
-                <label htmlFor="startDate">Дата начала записи</label>
-                <FormControl id="startDate" defaultValue={enrollment?.StartDate}></FormControl>
-            </FormGroup>
-            <FormGroup>
-                <label htmlFor="endDate">Дата конца записи</label>
-                <FormControl id="endDate" defaultValue={enrollment?.EndDate}></FormControl>
             </FormGroup>
         </Form>
         <Button>Сохранить изменения</Button>

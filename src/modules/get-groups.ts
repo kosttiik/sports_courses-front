@@ -1,12 +1,14 @@
-import { Course } from './ds'
+import { Group } from './ds'
 
-export const getCourses = async (titlePattern = '') : Promise<Course[]> => {
-    return fetch('/api/courses?title_pattern=' + String(titlePattern))
+export const getGroups = async (titlePattern = '') : Promise<Group[]> => {
+    return fetch('/api/groups?title_pattern=' + String(titlePattern))
         .then((response) => response.json())
         .catch(() => ([
             {
                 "ID": 1,
-                "Title": "Курс №1",
+                "Title": "Группа №1",
+                "Course": "Отсутствует",
+                "Schedule": "Отсутствует",
                 "Location": "Отсутствует",
                 "Status": "Действует",
                 "CoachName": "Отсутствует",
@@ -14,12 +16,14 @@ export const getCourses = async (titlePattern = '') : Promise<Course[]> => {
                 "CoachEmail": "Отсутствует",
                 "Capacity": 0,
                 "Enrolled": 0,
-                "Description": "Курса не существует. Отсутствует связь с сервером.",
-                "Image": ""
+                "Description": "Группы не существует. Отсутствует связь с сервером.",
+                "ImageName": ""
             },
             {
                 "ID": 2,
-                "Title": "Курс №2",
+                "Title": "Группа №2",
+                "Course": "Отсутствует",
+                "Schedule": "Отсутствует",
                 "Location": "Отсутствует",
                 "Status": "Действует",
                 "CoachName": "Отсутствует",
@@ -27,12 +31,14 @@ export const getCourses = async (titlePattern = '') : Promise<Course[]> => {
                 "CoachEmail": "Отсутствует",
                 "Capacity": 0,
                 "Enrolled": 0,
-                "Description": "Курса не существует. Отсутствует связь с сервером.",
-                "Image": ""
+                "Description": "Группы не существует. Отсутствует связь с сервером.",
+                "ImageName": ""
             },
             {
                 "ID": 3,
-                "Title": "Курс №3",
+                "Title": "Группа №3",
+                "Course": "Отсутствует",
+                "Schedule": "Отсутствует",
                 "Location": "Отсутствует",
                 "Status": "Действует",
                 "CoachName": "Отсутствует",
@@ -40,8 +46,8 @@ export const getCourses = async (titlePattern = '') : Promise<Course[]> => {
                 "CoachEmail": "Отсутствует",
                 "Capacity": 0,
                 "Enrolled": 0,
-                "Description": "Курса не существует. Отсутствует связь с сервером.",
-                "Image": ""
+                "Description": "Группы не существует. Отсутствует связь с сервером.",
+                "ImageName": ""
             },
         ]));
 }
