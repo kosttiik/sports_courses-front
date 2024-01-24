@@ -1,3 +1,1 @@
-# BMSTU Sports Courses Frontend App
-
-***Enrollment in a BMSTU Sports Courses***
+# Запись на спортивные курсы МГТУ Фронт приложение

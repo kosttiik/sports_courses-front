@@ -1,36 +1,104 @@
 import { FC } from "react"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
+import { useSelector } from "react-redux"
 
-import { Form, FormControl, FormGroup, Button, FormSelect } from "react-bootstrap"
+import { Form, FormControl, FormGroup, Button, FormSelect, ListGroup, ListGroupItem, FormLabel } from "react-bootstrap"
 
 import { getEnrollment } from "./modules/get-enrollment"
-import { Enrollment } from "./modules/ds"
+import { Enrollment, Group } from "./modules/ds"
+import { getEnrollmentGroups } from "./modules/get-enrollment-groups"
+import store from "./store/store"
+
+interface InputChangeInterface {
+    target: HTMLInputElement;
+}
 
 const EnrollmentPage: FC = () => {
+    const newGroupInputRef = useRef<any>(null)
 
-    const [enrollmentId, setEnrollmentId] = useState(0)
+    const {userToken} = useSelector((state: ReturnType<typeof store.getState>) => state.auth)
+
     const [enrollment, setEnrollment] = useState<Enrollment>()
+    const [groupTitles, setGroupTitles] = useState<string[]>()
+    const [newGroup, setNewGroup] = useState('')
 
     useEffect(() => {
         const queryString = window.location.search
         const urlParams = new URLSearchParams(queryString)
         const enrollmentIdString = urlParams.get('enrollment_id')
-        if (enrollmentIdString != null) {
-            setEnrollmentId(+enrollmentIdString)
-        }
 
         const loadEnrollment = async () => {
-            const enrollment = await getEnrollment(enrollmentId)
+            if (enrollmentIdString === null) {
+                return
+            }
+            const enrollment = await getEnrollment(+enrollmentIdString)
             setEnrollment(enrollment)
+
+            if (userToken === null) {
+                return
+            }
+
+            const groups = await getEnrollmentGroups(+enrollmentIdString, userToken)
+            var groupTitles: string[] = []
+            for (let group of groups) {
+                groupTitles.push(group.Title)
+            }
+            setGroupTitles(groupTitles)
+        }
+        loadEnrollment()
+    }, [])
+
+    const removeGroup = (removedGroupName: string) => {
+        return (event: React.MouseEvent) => {
+            if (!groupTitles) {
+                return
+            }
+
+            setGroupTitles(groupTitles.filter(function(groupName) {
+                return groupName !== removedGroupName
+            }))
+
+            event.preventDefault()
+        }
+    }
+
+    const addGroup = () => {
+        if (!groupTitles || !newGroup) {
+            return
         }
 
-        loadEnrollment()
-    })
+        setGroupTitles(groupTitles.concat([newGroup]))
+        setNewGroup('')
+
+        if (newGroupInputRef.current != null) {
+            newGroupInputRef.current.value = ""
+        }
+    }
+
+    const handleNewGroupChange = (event: InputChangeInterface) => {
+        setNewGroup(event.target.value)
+    }
 
     return(
         <>
-        <h1>Редактирование записи #{enrollmentId}</h1>
+        <h1>Редактирование записи #{enrollment?.ID}</h1>
+        <h4>Группы:</h4>
+        <ListGroup style={{width: '500px'}}>
+            {regionNames?.map((regionName, regionID) => (
+                <ListGroupItem key={regionID}> {regionName}
+                    <span className="pull-right button-group" style={{float: 'right'}}>
+                        <Button variant="danger" onClick={removeRegion(regionName)}>Удалить</Button>
+                    </span>
+                </ListGroupItem>
+            ))
+            }
+        </ListGroup>
+        <span>
+            <input ref={newRegionInputRef} onChange={handleNewRegionChange}></input>
+            <Button onClick={addRegion}>Добавить</Button>
+        </span>
+        <h4>Характеристики:</h4>
         <Form>
             <FormGroup>
                 <label htmlFor="statusInput">Статус</label>

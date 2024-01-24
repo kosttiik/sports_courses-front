@@ -1,7 +1,6 @@
 import axios from "axios";
 
-export const enroll = async(groups: string[], userToken: string,
-    dateFinished: string, dateCreated: string, dateProcessed: string): Promise<string> => {
+export const enroll = async(groups: string[], userToken: string): Promise<string> => {
     const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -9,14 +8,11 @@ export const enroll = async(groups: string[], userToken: string,
         },
       }
     return axios.put(
-        '/api/enrollment/edit',
+        '/api/enroll',
         {
-          'dateCreated': dateCreated,
-          'dateFinished': dateFinished,
-          'dateProcessed': dateProcessed,
+          'groups': groups,
         },
         config
-
     )
     .then((response) => response.data);
 }

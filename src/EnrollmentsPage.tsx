@@ -4,6 +4,7 @@ import { Table, Button } from 'react-bootstrap'
 
 import store from './store/store'
 import { getEnrollments } from './modules/get-enrollments'
+import { getEnrollmentGroups } from "./modules/get-enrollment-groups"
 import { Enrollment } from './modules/ds'
 
 const EnrollmentsPage: FC = () => {
@@ -16,16 +17,26 @@ const EnrollmentsPage: FC = () => {
         const loadEnrollments = async()  => {
             if (userToken !== undefined) {
                 enrollments = await getEnrollments(userToken?.toString(), '')
+
+                if (!userToken) {
+                    return
+                }
+
                 var arr: string[][] = []
                 for (let enrollment of enrollments) {
+                    const groups = await getEnrollmentGroups(enrollment.ID, userToken)
+                    const group_titles = []
+                    for (let group of groups) {
+                        group_titles.push(group.Title)
+                    }
+
                     var enrollmentArray:string[] = []
                     enrollmentArray.push(enrollment.ID.toString())
                     enrollmentArray.push(enrollment.Status)
+                    enrollmentArray.push(group_titles.toString().replace(new RegExp(',', 'g'), '\n'))
                     enrollmentArray.push(enrollment.DateCreated)
                     enrollmentArray.push(enrollment.DateProcessed)
                     enrollmentArray.push(enrollment.DateFinished)
-                    enrollmentArray.push(enrollment.StartDate)
-                    enrollmentArray.push(enrollment.EndDate)
 
                     arr.push(enrollmentArray)
                 }
@@ -45,7 +56,7 @@ const EnrollmentsPage: FC = () => {
                 <h3>Записи не найдены.</h3>
             }
             <Table>
-                <thead>
+                <thead className='thead-dark'>
                     <tr>
                         <th scope='col'>ID</th>
                         <th scope='col'>Статус</th>
@@ -67,7 +78,9 @@ const EnrollmentsPage: FC = () => {
                             ))
                             }
                             {((userRole?.toString() == '2') || (userRole?.toString() == '3')) &&
-                                <Button href={'/sports_courses-front/enrollment?enrollment_id=' + enrollmentsArray[rowID][0]}>Изменить</Button>
+                                <td>
+                                    <Button href={'/sports_courses-front/enrollment?enrollment_id=' + enrollmentsArray[rowID][0]}>Изменить</Button>
+                                </td>
                             }
                         </tr>
                     ))}

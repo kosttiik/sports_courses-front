@@ -3,7 +3,7 @@ import { Button, Card } from 'react-bootstrap'
 
 import './GroupPage.css'
 
-import { getGroupByName } from './modules/get-group-by-name'
+import { getGroupByName } from './modules/get-group'
 import { Group } from './modules/ds'
 
 const GroupPage: FC = () => {
