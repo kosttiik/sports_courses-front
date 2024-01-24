@@ -55,8 +55,8 @@ const EnrollmentPage: FC = () => {
                 return
             }
 
-            setGroupTitles(groupTitles.filter(function(groupName) {
-                return groupName !== removedGroupName
+            setGroupTitles(groupTitles.filter(function(groupTitle) {
+                return groupTitle !== removedGroupName
             }))
 
             event.preventDefault()
@@ -85,18 +85,18 @@ const EnrollmentPage: FC = () => {
         <h1>Редактирование записи #{enrollment?.ID}</h1>
         <h4>Группы:</h4>
         <ListGroup style={{width: '500px'}}>
-            {regionNames?.map((regionName, regionID) => (
-                <ListGroupItem key={regionID}> {regionName}
+            {groupTitles?.map((groupTitle, groupID) => (
+                <ListGroupItem key={groupID}> {groupTitle}
                     <span className="pull-right button-group" style={{float: 'right'}}>
-                        <Button variant="danger" onClick={removeRegion(regionName)}>Удалить</Button>
+                        <Button variant="danger" onClick={removeGroup(groupTitle)}>Удалить</Button>
                     </span>
                 </ListGroupItem>
             ))
             }
         </ListGroup>
         <span>
-            <input ref={newRegionInputRef} onChange={handleNewRegionChange}></input>
-            <Button onClick={addRegion}>Добавить</Button>
+            <input ref={newGroupInputRef} onChange={handleNewGroupChange}></input>
+            <Button onClick={addGroup}>Добавить</Button>
         </span>
         <h4>Характеристики:</h4>
         <Form>
