@@ -1,21 +1,18 @@
-import {Enrollment} from './ds'
-import axios from 'axios'
+import axios from 'axios';
 
-export const editEnrollment = async(userToken = '', enrollment: Enrollment): Promise<string> => {
-    const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + userToken,
-        },
+export const editEnrollment = async(userToken = '', enrollment_id: number): Promise<string> => {
+  const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + userToken,
+      },
     }
-    return axios.put(
-        '/api/enrollment/edit',
-        {
-          'dateCreated': enrollment.DateCreated,
-          'dateFinished': enrollment.DateFinished,
-          'dateProcessed': enrollment.DateProcessed,
-        },
-        config
-    )
-    .then((response) => response.data)
+  return axios.put(
+    '/api/enrollment/edit',
+    {
+      enrollmentID: enrollment_id,
+    },
+    config
+  )
+  .then((response) => response.data);
 }

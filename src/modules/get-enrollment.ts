@@ -1,12 +1,15 @@
 import {Enrollment} from './ds'
+import axios from 'axios'
 
 export const getEnrollment = async  (id = 1): Promise<Enrollment> => {
-    return fetch('/api/enrollment?enrollment_id=' + String(id),{
-        method: 'GET',
+    const config = {
         headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) => response.json());
+            'Content-Type': 'application/json',
+        },
+    }
+
+    return axios.get(
+        '/api/enrollment?enrollment_id=' + String(id),
+        config)
+        .then((response) => response.data);
 }

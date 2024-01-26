@@ -2,12 +2,12 @@ import axios from 'axios'
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
 interface AuthInterface {
-  login: string
-  password: string
+  login: string,
+  password: string,
 }
 
 export const registerUser = createAsyncThunk(
-  'auth/register',
+    'auth/register', 
   async (credentials: AuthInterface, { rejectWithValue }) => {
     try {
       const config = {
@@ -22,10 +22,10 @@ export const registerUser = createAsyncThunk(
       )
     } catch (error) {
       if (!axios.isAxiosError(error)) {
-        return
+        return;
       }
 
-      // return custom error message from backend if present
+    // return custom error message from backend if present
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message)
       } else {
@@ -37,25 +37,27 @@ export const registerUser = createAsyncThunk(
 
 export const loginUser = createAsyncThunk(
   'auth/login',
-  async (credentials: AuthInterface, { rejectWithValue }) => {
+  async(credentials: AuthInterface, { rejectWithValue }) => {
     try {
       const config = {
         headers: {
           'Content-Type': 'application/json',
         },
       }
-      const { data } = await axios.post(
+      const {data} = await axios.post(
         `/api/login`,
         credentials,
         config
       )
+
       localStorage.setItem('userName', data.login)
       localStorage.setItem('userToken', data.access_token)
       localStorage.setItem('userRole', data.role)
+
       return data
     } catch (error) {
       if (!axios.isAxiosError(error)) {
-        return
+        return;
       }
 
       if (error.response && error.response.data.message) {
@@ -64,40 +66,37 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue(error.message)
       }
     }
-  }
-)
+  })
 
-export const logoutUser = createAsyncThunk(
-  'auth/logout',
-  async (userToken: string, { rejectWithValue }) => {
-    localStorage.setItem('userToken', '')
-    localStorage.setItem('userName', '')
+  export const logoutUser = createAsyncThunk(
+    '/auth/logout',
+    async(userToken: string, {rejectWithValue}) => {
+      try {
+        localStorage.setItem('userToken', '')
+        localStorage.setItem('userName', '')
+        const config = {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + userToken,
+          },
+        }
+        const {data} = await axios.post(
+          `/api/logout`,
+          {},
+          config
+        )
+        return data
 
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + userToken,
-        },
-      }
-      const { data } = await axios.post(
-        `/api/logout`,
-        {},
-        config
-      )
-
-      return data
-
-    } catch (error) {
-      if (!axios.isAxiosError(error)) {
-        return
-      }
-
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message)
-      } else {
-        return rejectWithValue(error.message)
-      }
+      } catch (error) {
+        if (!axios.isAxiosError(error)) {
+          return;
+        }
+  
+        if (error.response && error.response.data.message) {
+          return rejectWithValue(error.response.data.message)
+        } else {
+          return rejectWithValue(error.message)
+        }
     }
   }
 )

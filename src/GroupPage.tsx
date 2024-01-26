@@ -2,13 +2,14 @@ import { FC, useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap'
 
 import './GroupPage.css'
+import defaultImage from './assets/empty-group.png'
 
-import { getGroupByName } from './modules/get-group'
+import { getGroupByTitle } from './modules/get-group'
 import { Group } from './modules/ds'
 
 const GroupPage: FC = () => {
-
     const [group, setGroup] = useState<Group>()
+    const [imageUrl, setImageUrl] = useState('sports_courses-front/src/assets/empty-group.png')
 
     useEffect(() => {
         const queryString = window.location.search;
@@ -16,36 +17,38 @@ const GroupPage: FC = () => {
         const groupTitle = urlParams.get('group_title')
     
         const loadGroup = async () => {
-            const result = await getGroupByName(String(groupTitle))
+            const result = await getGroupByTitle(String(groupTitle))
             setGroup(result)
-        }
 
+            if (result?.ImageName.toString()) {
+                setImageUrl(result?.ImageName.toString())
+            } else {
+                setImageUrl(defaultImage?.toString())
+            }
+        }
         loadGroup()
-    }, []);
+    }, [])
 
     return (
         <div className='card_container'>
-            <Card className='h-1'>
-            <Card.Img src={(group?.ImageName == '' ? '/group_image/fitness.png' : "/group_image/" + group?.ImageName)} className="card_image" variant="top" />
+            <Card style={{width: '300px'}}>
+                <Card.Img src={imageUrl} variant="top" />
                 <Card.Body>
-                    <Card.Text>
-                        <p>Курс:<b> { group?.Course }</b></p>
-                        <p>Время:<b> { group?.Schedule }</b></p>
-                        <p><b>{ group?.Description }</b></p>
-                        <p><b>Статус:</b> { group?.Status }</p>
-                        <p><b>Место:</b> { group?.Location }</p>
-                        <p><b>Количество мест:</b> { group?.Capacity } чел.</p>
-                        <p><b>Зарегистрировано:</b> { group?.Enrolled } чел.</p>
-                        <p><b>Преподаватель:</b> { group?.CoachName }</p>
-                        <p><b>E-Mail преподавателя:</b> { group?.CoachEmail }</p>
-                        <p><b>Телефон преподавателя:</b> { group?.CoachPhone }</p>
-                    </Card.Text>
+                    <p><b>Статус: {group?.Status}</b></p>
+                    <p>Курс: {group?.Course}</p>
+                    <p>Расписание: {group?.Schedule}</p>
+                    <p>Количество участников: {group?.Capacity} чел.</p>
+                    <p>Зарегистрировано: {group?.Enrolled} чел.</p>
+                    <p>Преподаватель: {group?.CoachName}</p>
+                    <p>Email преподавателя: {group?.CoachEmail}</p>
+                    <p>Телефон преподавателя: {group?.CoachPhone}</p>
+                    <p>{group?.Description}</p>
                 </Card.Body>
                 <Card.Footer>
                     <Button href="/sports_courses-front/">Домой</Button>
                 </Card.Footer>
             </Card>
-        </div>        
+        </div>
     )
 }
 

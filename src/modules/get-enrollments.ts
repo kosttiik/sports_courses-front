@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-import { Enrollment } from './ds'
+import {Enrollment} from './ds'
 
-export const getEnrollments = async (userToken = '', status = ''): Promise<Enrollment[]> => {
+export const getEnrollments = async (userToken = '', status = '', startDate = '', endDate = ''): Promise<Enrollment[]> => {
     const config = {
         headers: {
             'Content-Type': 'application/json',
@@ -10,12 +10,8 @@ export const getEnrollments = async (userToken = '', status = ''): Promise<Enrol
         },
     }
     return axios.get(
-        `/api/enrollments?status=` + status,
+        `/api/enrollments?status=` + status + '&startDate=' + startDate + '&endDate=' + endDate,
         config,
     )
-    .then((response) => {
-        const { data } = response
-
-        return data
-    })
+    .then((response) => response.data) 
 }

@@ -1,79 +1,80 @@
-import { createSlice, PayloadAction, ActionReducerMapBuilder } from "@reduxjs/toolkit"
-import { registerUser, loginUser, logoutUser } from "../modules/authActions"
+import { createSlice } from "@reduxjs/toolkit";
+import { registerUser, loginUser , logoutUser} from "../modules/authActions";
 
-const userToken = localStorage.getItem('userToken') || ''
-const userName = localStorage.getItem('userName') || ''
-const userRole = localStorage.getItem('userRole')?.toString() || '0'
+const userToken = localStorage.getItem('userToken')
+    ? localStorage.getItem('userToken')
+    : '';
 
-interface AuthState {
-  loading: boolean
-  userToken: string
-  userName: string
-  userRole: string
-  userInfo: {}
-  error: null | any
-  success: boolean
-}
+const userName = localStorage.getItem('userName')
+    ? localStorage.getItem('userName')
+    : '';
 
-const initialState: AuthState = {
-  loading: false,
-  userToken,
-  userName,
-  userRole,
-  userInfo: {},
-  error: null,
-  success: false,
+const userRole = localStorage.getItem('userRole')
+    ? localStorage.getItem('userRole')?.toString()
+    : '0';
+
+const initialState = {
+    loading: false,
+    userToken,
+    userName,
+    userRole,
+    userInfo: {},
+    error: null,
+    success: false,
 }
 
 const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {},
-  extraReducers: (builder: ActionReducerMapBuilder<AuthState>) => {
-    builder
-      .addCase(registerUser.pending, (state) => {
-        state.loading = true
-        state.error = null
-      })
-      .addCase(registerUser.fulfilled, (state) => {
-        state.loading = false
-        state.success = true
-      })
-      .addCase(registerUser.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        state.error = action.payload
-      })
-      .addCase(loginUser.pending, (state) => {
-        state.loading = true
-        state.error = null
-      })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        state.success = true
-        state.userToken = action.payload.access_token
-        state.userName = action.payload.login
-      })
-      .addCase(loginUser.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        state.success = false
-        state.error = action.payload
-      })
-      .addCase(logoutUser.pending, (state) => {
-        state.loading = true
-        state.error = null
-      })
-      .addCase(logoutUser.fulfilled, (state) => {
-        state.loading = false
-        state.success = true
-        state.userToken = ''
-        state.userName = ''
-      })
-      .addCase(logoutUser.rejected, (state, action: PayloadAction<any>) => {
-        state.loading = false
-        state.success = false
-        state.error = action.payload
-      })
-  },
+    name: 'auth',
+    initialState,
+    reducers: {},
+    extraReducers: {
+        [registerUser.pending.toString()]: (state) => {
+            state.loading = true;
+            state.error = null
+        },
+        [registerUser.fulfilled.toString()]: (state) => {
+            state.loading = false;
+            state.success = true;
+        },
+        [registerUser.rejected.toString()]: (state, {payload}) => {
+            state.loading = false;
+            state.error = payload;
+        },
+
+
+        [loginUser.pending.toString()]: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        [loginUser.fulfilled.toString()]: (state, {payload}) => {
+            state.loading = false
+            state.success = true
+            state.userToken = payload.access_token
+            state.userName = payload.login
+        },
+        [loginUser.rejected.toString()]: (state, {payload}) => {
+            state.loading = false
+            state.success = false
+            state.error = payload
+        },
+
+
+        [logoutUser.pending.toString()]: (state) => {
+            state.loading = true
+            state.error = null
+        },
+        [logoutUser.fulfilled.toString()]: (state) => {
+            state.loading = false
+            state.success = true;
+            state.userToken = ''
+            state.userName = ''
+        },
+        [logoutUser.rejected.toString()]: (state, {payload}) => {
+            state.loading = false
+            state.success = false
+            state.error = payload
+        }
+    },
 })
 
 export default authSlice.reducer

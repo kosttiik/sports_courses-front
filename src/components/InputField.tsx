@@ -18,4 +18,4 @@ const InputField: FC<Props> = ({ value, setValue, onSubmit, loading, placeholder
     </div>
 )
 
-export default InputField;
+export default InputField

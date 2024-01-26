@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios"
 
-export const enroll = async(groups: string[], userToken: string): Promise<string> => {
+export const enroll = async(groups: string[], userToken: string, status: string): Promise<AxiosResponse> => {
     const config = {
         headers: {
           'Content-Type': 'application/json',
@@ -8,11 +8,12 @@ export const enroll = async(groups: string[], userToken: string): Promise<string
         },
       }
     return axios.put(
-        '/api/enroll',
-        {
-          'groups': groups,
-        },
-        config
+      '/api/enroll',
+      {
+        'groups': groups,
+        'status': status,
+      },
+      config
     )
-    .then((response) => response.data);
+    .then((response) => response);
 }

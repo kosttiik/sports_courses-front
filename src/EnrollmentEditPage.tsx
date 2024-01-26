@@ -1,9 +1,7 @@
-import { FC } from "react";
+import { FC, useEffect, useState, useRef} from "react"
+import { useSelector } from "react-redux"
 
-import { useEffect, useState, useRef} from "react";
-import { useSelector } from "react-redux";
-
-import { Col, Form,  Button,ListGroup, ListGroupItem,  FormLabel, Row } from "react-bootstrap";
+import { Container,Col, Form,  Button,ListGroup, ListGroupItem,  FormLabel, Row } from "react-bootstrap"
 
 import { getEnrollment } from "./modules/get-enrollment";
 import { Enrollment } from "./modules/ds";
@@ -12,19 +10,20 @@ import store from "./store/store";
 import cartSlice from './store/cartSlice'
 import { useAppDispatch } from "./store/store";
 
-import { addGroupToDraft } from "./modules/add-group-to-draft";
-import { getGroupByTitle } from "./modules/get-group";
-import { removeGroupFromEnrollment } from "./modules/remove-group-from-enrollment";
+import { addGroupToDraft } from "./modules/add-group-to-draft"
+import { getGroupByTitle } from "./modules/get-group"
+import { removeGroupFromEnrollment } from "./modules/remove-group-from-enrollment"
 import { approveEnrollment } from "./modules/approve-enrollment"
 
-import { useNavigate } from "react-router-dom";
-import { editEnrollment } from "./modules/edit-enrollment";
+import { useNavigate } from "react-router-dom"
+import { editEnrollment } from "./modules/edit-enrollment"
+import { modApproveEnrollment } from "./modules/mod-approve-enrollment"
 
 interface InputChangeInterface {
     target: HTMLInputElement
-  }
+}
 
-const EnrollmentPage: FC = () => {
+const EnrollmentEditPage: FC = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
 
@@ -39,7 +38,7 @@ const EnrollmentPage: FC = () => {
     const newGroupInputRef = useRef<any>(null)
 
     useEffect(() => {
-        const queryString = window.location.search
+        const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString)
         const enrollmentIdString = urlParams.get('enrollment_id')
 
@@ -57,6 +56,7 @@ const EnrollmentPage: FC = () => {
             if (userToken === null) {
                 return
             }
+
             const groups = await getEnrollmentGroups(+enrollmentIdString, userToken)
             var groupTitles: string[] = []
             if (groups) {
@@ -82,6 +82,28 @@ const EnrollmentPage: FC = () => {
         await editEnrollment(userToken, enrollment?.ID)
     }
 
+    const modConfirmTrue = async() => {
+        if (!userToken || !enrollment?.ID) {
+            return
+        }
+
+        const result = await modApproveEnrollment(userToken, enrollment?.ID, 'True')
+        if (result.status == 200) {
+            navigate('/sports_courses-front/enrollments')
+        }
+    }
+
+    const modConfirmFalse = async() => {
+        if (!userToken || !enrollment?.ID) {
+            return
+        }
+
+        const result = await modApproveEnrollment(userToken, enrollment?.ID, 'False')
+        if (result.status == 200) {
+            navigate('/sports_courses-front/enrollments')
+        }
+    }
+
     const removeGroup = async(event: React.MouseEvent<HTMLButtonElement>) => {
         let removedGroupTitle = event.currentTarget.id
 
@@ -102,7 +124,6 @@ const EnrollmentPage: FC = () => {
         setGroupTitles(groupTitles.filter(function(groupTitle) {
             return groupTitle !== removedGroupTitle
         }))
-
     }
 
     const handleNewGroupChange = (event: InputChangeInterface) => {
@@ -123,18 +144,17 @@ const EnrollmentPage: FC = () => {
             return
         }
 
-        const addition_result = await addGroupToDraft(userToken, result.ID);
+        const addition_result = await addGroupToDraft(userToken, result.ID)
         if (addition_result.status != 200) {
             return
         }
-
 
         if (!groupTitles) {
             setGroupTitles([newGroup.toString()]);
         }
 
         if (groupTitles === undefined) {
-            return;
+            return
         }
 
         setGroupTitles(groupTitles.concat([newGroup]))
@@ -147,7 +167,7 @@ const EnrollmentPage: FC = () => {
 
     if (wrongEnrollment) {
         return (
-            <h1>Записи не существует!</h1>
+            <h1>Запись не существует!</h1>
         )
     }
 
@@ -193,6 +213,10 @@ const EnrollmentPage: FC = () => {
             <p></p>
             <FormLabel>Статус: {enrollment?.Status}</FormLabel>
             <p></p>
+            <p></p>
+            {(enrollment?.Status == "Черновик" && (enrollment.User?.name == userName || userRole == "2"))}
+            {!(enrollment?.Status == "Черновик" && (enrollment.User?.name == userName || userRole == "2"))}
+
             {(enrollment?.Status == "Черновик" && enrollment.User?.name == userName) &&
                 <Row>
                     <p></p>
@@ -200,6 +224,19 @@ const EnrollmentPage: FC = () => {
                 </Row>
             }
             <p></p>
+            {(enrollment?.Status == "Сформирован") &&
+                <Container>
+                    <Row>
+                        <Col>
+                            <Button onClick={modConfirmFalse} variant="danger" className="w-100">Отклонить</Button>
+                        </Col>
+                        <Col>
+                            <Button onClick={modConfirmTrue} variant="success" className="w-100">Одобрить</Button>
+                        </Col>
+                    </Row>
+                </Container>
+            }
+
             <Row>
                 <Button href='/sports_courses-front/enrollments'>К записям</Button>
             </Row>
@@ -212,4 +249,4 @@ const EnrollmentPage: FC = () => {
     )
 }
 
-export default EnrollmentPage
+export default EnrollmentEditPage

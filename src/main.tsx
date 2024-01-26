@@ -1,23 +1,26 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Provider } from 'react-redux'
+import { BrowserRouter} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
+
+import GroupsPage from './GroupsPage'
+import RegisterPage from './RegisterPage'
+import GroupPage from './GroupPage'
+import EnrollmentsPage from './EnrollmentsPage'
+import Navigation from './components/Navigation'
+import Breadcrumbs from './components/Breadcrumbs'
+import AuthPage from './AuthPage'
+import store from './store/store'
+import ModGroupsPage from './ModGroupPage'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import GroupsPage from './GroupsPage'
-import GroupPage from './GroupPage'
-import AuthPage from './AuthPage'
-import EnrollmentsPage from './EnrollmentsPage'
-import AccountPage from './AccountPage'
-import EnrollPage from './EnrollPage'
+import './index.css'
+
+import { Provider } from 'react-redux'
 import EnrollmentPage from './EnrollmentPage'
-
-import Navigation from './components/Navigation/Navigation'
-import Breadcrumbs from './components/Breadcrumbs/Breadcrumbs'
-import store from './store/store'
-
-
+import EnrollmentEditPage from './EnrollmentEditPage'
+import GroupEditPage from './GroupEditPage'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -26,13 +29,15 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Navigation />
         <Breadcrumbs />
         <Routes>
-          <Route path="/sports_courses-front" Component={ GroupsPage } />
-          <Route path="/sports_courses-front/group" Component={ GroupPage } />
-          <Route path="/sports_courses-front/auth" Component={ AuthPage } />
-          <Route path="/sports_courses-front/account" Component={ AccountPage } />
-          <Route path="/sports_courses-front/enrollments" Component={ EnrollmentsPage } />
-          <Route path="/sports_courses-front/enroll" Component={ EnrollPage } />
-          <Route path="/sports_courses-front/enrollment" Component={ EnrollmentPage } />
+          <Route path="/sports_courses-front/enrollments" Component={EnrollmentsPage} />
+          <Route path="/sports_courses-front" Component={GroupsPage} />
+          <Route path="/sports_courses-front/mod_groups" Component={ModGroupsPage} />
+          <Route path="/sports_courses-front/group" Component={GroupPage} />
+          <Route path="/sports_courses-front/enrollment" Component={EnrollmentPage} />
+          <Route path="/sports_courses-front/auth" Component={AuthPage} />
+          <Route path="/sports_courses-front/register" Component={RegisterPage} />
+          <Route path="/sports_courses-front/enrollment_edit" Component={EnrollmentEditPage} />
+          <Route path="/sports_courses-front/group_edit" Component={GroupEditPage} />
         </Routes>
       </BrowserRouter>
     </Provider>
