@@ -21,7 +21,7 @@ const GroupPage: FC = () => {
             setGroup(result)
 
             if (result?.ImageName.toString()) {
-                setImageUrl(result?.ImageName.toString())
+                setImageUrl("/group_image/" + result?.ImageName.toString())
             } else {
                 setImageUrl(defaultImage?.toString())
             }

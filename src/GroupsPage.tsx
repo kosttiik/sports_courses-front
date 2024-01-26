@@ -65,7 +65,7 @@ const GroupsPage: FC = () => {
                     {groups.map((item, index) => (
                         <Col key={index} md={3} className="mb-4"> 
                             <GroupCard {...{
-                                 imageUrl: (item.ImageName == '' ? defaultImage?.toString() : item.ImageName?.toString()),
+                                 imageUrl: (item.ImageName == '' ? defaultImage?.toString() : "/group_image/" + item.ImageName?.toString()),
                                  groupTitle: item.Title,
                                  groupCourse: item.Course,
                                  groupSchedule: item.Schedule,
