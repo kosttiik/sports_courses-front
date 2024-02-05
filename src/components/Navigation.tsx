@@ -9,6 +9,7 @@ import { Button } from 'react-bootstrap'
 import { logoutUser } from '../modules/authActions'
 import { useAppDispatch } from '../store/store'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const Navigation: FC = () => {
   const {userToken, userName, userRole} = useSelector((state: ReturnType<typeof store.getState>) => state.auth)
@@ -46,13 +47,13 @@ const Navigation: FC = () => {
         <Navbar.Collapse className='justify-content-end'>
           <Nav.Link style={{ width: 'auto', color: '#FFFFFF' }} href={"/sports_courses-front/enrollment?enrollment_id=" + String(draftID)}>Корзина</Nav.Link>
           <Nav.Item style={{ marginLeft: '17px', marginRight: '10px', width: 'auto', color: '#FFFFFF' }}>Пользователь: {userName}</Nav.Item>
-          <Button onClick={sendLogout}>Выход</Button>
+          <Button onClick={sendLogout} style={{ marginRight: '20px', width: 'auto', color: '#FFFFFF' }} className='react-button-inverse'>Выход</Button>
         </Navbar.Collapse>
       }
       {!userToken &&
           <Navbar.Collapse className='justify-content-end'>
-            <Button href="/sports_courses-front/auth" style={{ marginRight: '20px', width: 'auto' }}>Вход</Button>
-            <Button href="/sports_courses-front/register" style={{ marginRight: '20px', width: 'auto' }}>Регистрация</Button>
+            <Link to={"/sports_courses-front/auth"} style={{ marginRight: '20px', width: 'auto', color: '#FFFFFF' }} className='btn btn-primary react-button'>Вход</Link>
+            <Link to={"/sports_courses-front/register"} style={{ marginRight: '20px', width: 'auto', color: '#FFFFFF' }} className='btn btn-primary react-button'>Регистрация</Link>
           </Navbar.Collapse>
       }
     </Navbar>

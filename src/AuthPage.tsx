@@ -1,11 +1,14 @@
 import {FC, useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 
 import {Button, Spinner, Modal, FormGroup, Form, FormLabel, Row, Col} from 'react-bootstrap'
 
 import store, { useAppDispatch } from './store/store'
-import { loginUser } from './modules/authActions';
+import { loginUser } from './modules/authActions'
+import { Link } from 'react-router-dom'
+
+
 
 interface InputChangeInterface {
     target: HTMLInputElement
@@ -94,11 +97,11 @@ const AuthPage: FC = () => {
                 </FormGroup>
                 <p></p>
                 <Row>
-                    <Button onClick={sendLogin} disabled={loading}>Войти</Button>
+                    <Button onClick={sendLogin} disabled={loading} className='react-button'>Войти</Button>
                 </Row>
                 <p></p>
                 <Row>
-                    <Button disabled={loading} href="/sports_courses-front/register">Регистрация</Button>
+                    <Link to={"/sports_courses-front/register"} className='btn btn-primary react-button'>Регистрация</Link>
                 </Row>
                 <p></p>
                 {loading ? <Spinner /> : ''}    

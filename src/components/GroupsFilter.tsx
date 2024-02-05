@@ -34,7 +34,7 @@ const GroupsFilter: FC = () => {
                     <input ref={courseRef} defaultValue={groupCourse?.toString()} className="form-control" style={{width: '250px', marginLeft: '50px'}} />
                 </Col>
                 <Col className="justify-content-center">
-                    <Button onClick={applyFilters} style={{marginTop: '31px', marginLeft: '-125px'}}>Поиск</Button>
+                    <Button onClick={applyFilters} style={{marginTop: '31px', marginLeft: '-125px'}} className='react-button-inverse'>Поиск</Button>
                 </Col>
             </Row>
         </Container>

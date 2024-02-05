@@ -14,7 +14,7 @@ interface Props {
 const InputField: FC<Props> = ({ value, setValue, onSubmit, loading, placeholder, buttonTitle = 'Искать' }) => (
     <div className="inputField">
         <input value={value} placeholder={placeholder} onChange={(event => setValue(event.target.value))}/>
-        <Button disabled={loading} onClick={onSubmit}>{buttonTitle}</Button>
+        <Button disabled={loading} onClick={onSubmit} className='react-button'>{buttonTitle}</Button>
     </div>
 )
 

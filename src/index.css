@@ -19,3 +19,41 @@ a {
 a:hover {
     color: #535bf2;
 }
+
+.react-button {
+    border: 0px;
+    background-color: transparent;
+    color: #144ECA;
+    padding: 0.4rem 0.8rem;
+    text-align: center;
+    border-radius: 0.25rem;
+    display: inline-block;
+    vertical-align: middle;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #144ECA;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-width: 8rem;
+}
+
+.react-button-inverse {
+    text-transform: none;
+    padding: 0.4rem 0.6rem;
+    min-width: auto;
+    color: #144ECA;
+    background: transparent;
+    border: 0px;
+    text-align: center;
+    border-radius: 0.25rem;
+    display: inline-block;
+    vertical-align: middle;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #144ECA;
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    -moz-appearance: none;
+    appearance: none;
+}

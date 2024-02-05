@@ -53,10 +53,11 @@ const ModGroupsPage : FC = () => {
     if (!userToken || !userRole || (userRole?.toString() != '2' && userRole?.toString() != '3') ) {
         return (
             <>
-                <p>У вас недостатоно прав для просмотра данной страницы.</p>
+                <p>У вас недостаточно прав для просмотра данной страницы.</p>
             </>
         )
     }
+
     return (
         <>
             <Modal show = {enrolled} onHide={handleModalClose}>

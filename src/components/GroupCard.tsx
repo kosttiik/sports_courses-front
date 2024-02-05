@@ -7,7 +7,7 @@ import { addGroupToDraft } from '../modules/add-group-to-draft'
 
 import './GroupCard.css'
 import cartSlice from '../store/cartSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 interface Props {
     imageUrl: string
     groupTitle: string
@@ -41,9 +41,9 @@ const GroupCard: FC<Props> = ({imageUrl, groupTitle, groupSchedule, groupCourse,
                 <Card.Title className='mt-auto'><b>{groupTitle}</b></Card.Title>
                 <Card.Text className='mt-auto'>Курс: <b>{groupCourse}</b> <br /> Расписание: <b>{groupSchedule}</b></Card.Text>
                 <ButtonGroup vertical className='text-center'>
-                    <Button variant="primary" href={pageUrl}>Подробнее</Button>
+                <Link to={pageUrl} className='btn btn-primary react-button'>Подробнее</Link>
                     { userToken &&
-                        <Button variant="warning" onClick={addGroupToCard}>В запись</Button>
+                        <Button variant="warning" onClick={addGroupToCard} className='react-button-inverse'>В запись</Button>
                     }
                 </ButtonGroup>
             </Card.Body>

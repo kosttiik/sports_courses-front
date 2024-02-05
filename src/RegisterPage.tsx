@@ -6,6 +6,7 @@ import {Button, Spinner, Modal, FormGroup, Form, FormLabel, Row, Col} from 'reac
 
 import store, { useAppDispatch } from './store/store'
 import { registerUser } from './modules/authActions'
+import { Link } from 'react-router-dom'
 
 interface InputChangeInterface {
     target: HTMLInputElement
@@ -92,11 +93,11 @@ const RegisterPage: FC = () => {
                 </FormGroup>
                 <p></p>
                 <Row>
-                    <Button onClick={sendRegister} disabled={loading}>Зарегистрироваться</Button>
+                    <Button onClick={sendRegister} disabled={loading} className='react-button'>Зарегистрироваться</Button>
                 </Row>
                 <p></p>
                 <Row>
-                    <Button disabled={loading} href="/sports_courses-front/auth">Перейти к авторизации</Button>
+                    <Link to={"/sports_courses-front/auth"} className='btn btn-primary react-button'>Перейти к авторизации</Link>
                 </Row>
                 <p></p>
                 {loading ? <Spinner /> : ''}    

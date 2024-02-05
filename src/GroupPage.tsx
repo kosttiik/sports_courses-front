@@ -1,11 +1,12 @@
 import { FC, useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap'
 
 import './GroupPage.css'
 import defaultImage from './assets/empty-group.png'
 
 import { getGroupByTitle } from './modules/get-group'
 import { Group } from './modules/ds'
+import { Link } from 'react-router-dom'
 
 const GroupPage: FC = () => {
     const [group, setGroup] = useState<Group>()
@@ -45,7 +46,7 @@ const GroupPage: FC = () => {
                     <p>{group?.Description}</p>
                 </Card.Body>
                 <Card.Footer>
-                    <Button href="/sports_courses-front/">Домой</Button>
+                    <Link to={"/sports_courses-front/"} className='btn btn-primary react-button'>Домой</Link>
                 </Card.Footer>
             </Card>
         </div>
